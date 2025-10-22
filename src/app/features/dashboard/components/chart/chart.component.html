@@ -1,18 +1,12 @@
-<div class="chart-wrapper">
-  <h3>Price Over Time (last points)</h3>
-  <div *ngIf="marketData?.length; else empty">
-    <div
-      style="
-        height: 300px;
-        border: 1px dashed #ccc;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      "
-    >
-      <!-- Placeholder visualization: simple sparkline made with unicode for demo purposes -->
-      <div>{{ dataset.join(', ') }}</div>
-    </div>
-  </div>
-  <ng-template #empty><p>No data yet.</p></ng-template>
+<div class="p-2">
+    <h3 class="text-lg font-semibold mb-2">Price Over Time (last points)</h3>
+
+    @if (marketData?.length) {
+        <div class="h-[300px] border border-dashed border-gray-300 flex items-center justify-center">
+            <!-- Placeholder visualization: simple sparkline made with unicode for demo purposes -->
+            <div>{{ dataset.join(', ') }}</div>
+        </div>
+    } @else {
+        <p>No data yet.</p>
+    }
 </div>
