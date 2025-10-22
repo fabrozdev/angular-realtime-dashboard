@@ -1,0 +1,15 @@
+<div class="dashboard">
+  <header style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px">
+    <h2>Realtime Dashboard (Demo)</h2>
+    <button (click)="togglePause()">{{ paused ? 'Resume' : 'Pause' }}</button>
+  </header>
+
+  <section style="display: grid; grid-template-columns: 2fr 1fr; gap: 12px">
+    <div>
+      <app-chart [marketData]="buffer$ | async"></app-chart>
+    </div>
+    <div>
+      <app-table [marketData]="buffer$ | async"></app-table>
+    </div>
+  </section>
+</div>

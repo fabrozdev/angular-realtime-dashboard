@@ -1,0 +1,19 @@
+<div class="table-container">
+  <h3>Recent Messages</h3>
+  <table style="width: 100%; border-collapse: collapse">
+    <thead style="text-align: left">
+      <tr>
+        <th>Symbol</th>
+        <th>Price</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let m of marketData; trackBy: trackByTime">
+        <td>{{ m.symbol }}</td>
+        <td>{{ m.price | number: '1.2-2' }}</td>
+        <td>{{ m.time | date: 'mediumTime' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

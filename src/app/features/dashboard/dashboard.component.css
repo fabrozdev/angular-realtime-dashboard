@@ -1,0 +1,5 @@
+/* Simple styles for the demo dashboard */
+.dashboard {
+  max-width: 1100px;
+  margin: 0 auto;
+}
