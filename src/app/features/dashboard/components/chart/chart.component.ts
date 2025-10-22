@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.css'],
   standalone: true,
   imports: [CommonModule],
 })
