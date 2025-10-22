@@ -14,11 +14,11 @@ import { ChartComponent } from './components/chart/chart.component';
   imports: [CommonModule, ChartComponent, TableComponent],
 })
 export class DashboardComponent implements OnDestroy {
-  private sub = new Subscription();
+  private readonly sub = new Subscription();
   public buffer$ = new BehaviorSubject<MarketData[]>([]);
   public paused = false;
 
-  constructor(private ws: WebsocketService) {
+  constructor(private readonly ws: WebsocketService) {
     const stream$ = this.ws.connect();
 
     // Keep a rolling window of latest 30 points per symbol (across all messages we keep last 30 total)

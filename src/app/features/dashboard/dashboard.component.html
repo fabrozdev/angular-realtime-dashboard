@@ -1,15 +1,15 @@
-<div class="dashboard">
-  <header class="flex items-center gap-3 mb-3 p-1 justify-between">
-    <h2 class="text-2xl">Realtime Dashboard (Demo)</h2>
-    <button (click)="togglePause()" class="bg-black text-white rounded-md p-1">{{ paused ? 'Resume' : 'Pause' }}</button>
-  </header>
+<div class="dashboard h-screen flex flex-col p-4">
+    <header class="flex items-center gap-3 mb-3 p-1 justify-between flex-shrink-0">
+        <h2 class="text-2xl">Realtime Dashboard (Demo)</h2>
+        <button (click)="togglePause()" class="bg-black text-white rounded-md p-1">{{ paused ? 'Resume' : 'Pause' }}</button>
+    </header>
 
-  <section class="grid grid-cols-[2fr_1fr] gap-3">
-    <div>
-      <app-chart [marketData]="buffer$ | async"></app-chart>
-    </div>
-    <div>
-      <app-table [marketData]="buffer$ | async"></app-table>
-    </div>
-  </section>
+    <section class="grid grid-cols-[2fr_1fr] gap-3 flex-1 min-h-0">
+        <div>
+            <app-chart [marketData]="buffer$ | async"></app-chart>
+        </div>
+        <div class="min-h-0">
+            <app-table [marketData]="buffer$ | async"></app-table>
+        </div>
+    </section>
 </div>
