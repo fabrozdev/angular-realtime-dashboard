@@ -35,7 +35,6 @@ export class WebsocketService {
     }
 
     return this.socket$.pipe(
-      tap((message) => console.log('Received message:', message)),
       map((trade: SocketMessageData) => ({
         id: trade.t,
         symbol: trade.s,

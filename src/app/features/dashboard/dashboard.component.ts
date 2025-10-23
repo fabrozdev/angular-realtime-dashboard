@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { MarketData, WebsocketService } from '../../services/websocket.service';
-import { BehaviorSubject, distinctUntilChanged, map, scan, Subscription } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, scan, Subscription } from 'rxjs';
 import { TableComponent } from './components/table/table.component';
 import { CommonModule } from '@angular/common';
 import { ChartComponent } from './components/chart/chart.component';
@@ -21,18 +21,22 @@ export class DashboardComponent implements OnDestroy {
   constructor(private readonly ws: WebsocketService) {
     const stream$ = this.ws.connect();
 
-    // Keep a rolling window of latest 30 points per symbol (across all messages we keep last 30 total)
     this.sub.add(
       stream$
         .pipe(
           scan((acc: MarketData[], curr: MarketData) => {
-            return [...acc.slice(-29), curr];
+            const lastItem = acc[acc.length - 1];
+            if (lastItem && lastItem.time === curr.time) {
+              return [...acc.slice(0, -1), curr];
+            }
+            return [...acc.slice(-199), curr];
           }, [] as MarketData[]),
-          distinctUntilChanged(),
-          map((arr) => arr),
+          //distinctUntilChanged()
         )
         .subscribe((d) => {
-          if (!this.paused) this.buffer$.next(d);
+          if (!this.paused) {
+            this.buffer$.next(d);
+          }
         }),
     );
   }
@@ -43,5 +47,6 @@ export class DashboardComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+    this.buffer$.complete();
   }
 }
