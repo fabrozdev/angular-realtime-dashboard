@@ -15,8 +15,8 @@ export class ChartComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     const md = this.marketData || [];
-    this.labels = md.map((d) => new Date(d.time).toLocaleTimeString());
-    this.dataset = md.map((d) => d.price);
+    this.labels = md.map((d) => new Date(d.T).toLocaleTimeString());
+    this.dataset = md.map((d) => Number(d.p));
     // Note: In a real app you'd use Chart.js or another lib to render efficiently.
   }
 }
