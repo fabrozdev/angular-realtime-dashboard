@@ -1,8 +1,14 @@
 import { Injectable, NgZone } from '@angular/core';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
-import { Observable, catchError, EMPTY, retry, shareReplay, tap } from 'rxjs';
+import { Observable, catchError, EMPTY, retry, shareReplay, tap, map } from 'rxjs';
 
 export interface MarketData {
+  id: number;
+  symbol: string;
+  price: number;
+  time: number;
+}
+export interface SocketMessageData {
   e: 'trade'; // Event type
   E: number; // Event time (timestamp in milliseconds)
   s: string; // Symbol (e.g., "BTCUSDT", "BNBBTC")
@@ -30,6 +36,12 @@ export class WebsocketService {
 
     return this.socket$.pipe(
       tap((message) => console.log('Received message:', message)),
+      map((trade: SocketMessageData) => ({
+        id: trade.t,
+        symbol: trade.s,
+        price: Number(trade.p),
+        time: trade.T,
+      })),
       retry({ count: Infinity, delay: 2000 }),
       catchError((err) => {
         console.error('WS error', err);

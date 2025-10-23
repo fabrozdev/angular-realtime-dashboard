@@ -11,11 +11,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @for (m of marketData; track m.t) {
+                    @for (m of marketData; track m.id) {
                         <tr class="even:bg-gray-50 hover:bg-gray-100 transition">
-                            <td class="py-1 px-2 font-medium">{{ m.s }}</td>
-                            <td class="py-1 px-2">{{ m.p | number: '1.2-2' }}</td>
-                            <td class="py-1 px-2">{{ m.T | date: 'mediumTime' }}</td>
+                            <td class="py-1 px-2 font-medium">{{ m.symbol }}</td>
+                            <td class="py-1 px-2">{{ m.price | number: '1.2-2' }}</td>
+                            <td class="py-1 px-2">{{ m.time | date: 'mediumTime' }}</td>
                         </tr>
                     }
                 </tbody>
