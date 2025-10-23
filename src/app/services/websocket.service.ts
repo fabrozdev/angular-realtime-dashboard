@@ -15,11 +15,6 @@ export interface MarketData {
   m: boolean; // Is the buyer the market maker?
   M: boolean; // Ignore (can be used for future enhancements)
 }
-/* {
-  symbol: string;
-  price: number;
-  time: number;
-}*/
 
 @Injectable({ providedIn: 'root' })
 export class WebsocketService {
